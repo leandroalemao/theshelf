@@ -2,11 +2,9 @@ header.side-content.fixed-top
   .logo-wrap
     .logo
       = link_to '', root_path, class: 'logo-background'
-    #menu-toggle.menu-toggle-wrap
-      .menu-toggle.collapsed
-        .icon-bar
-        .icon-bar.icon-bar--half
-        .icon-bar
+    button#menu-toggle.button-hamburger aria-label=("Toggle Menu") role="button" type="button"
+      span.hamburger-lines
+
   .menu-wrap.collapsed
     .media.user-profile-menu
       .media-image
@@ -27,6 +25,7 @@ header.side-content.fixed-top
               .book-title.milli.truncate title="#{book.title}"
                 = link_to book.title, book.path
             .book-action = book.action
+
     #close-menu.close-menu
       a href='#'
         = t('menu.close')
