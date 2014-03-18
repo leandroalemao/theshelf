@@ -12,11 +12,12 @@
       +hide-visually
 
   .menu-wrap,
-  .menu-wrap.collapsed
-    position: fixed
+  .menu-wrap.closed
+    +transform(translateY(#{$laptop-header-height}))
+
+  .menu-wrap
     width: $side-content-width
     height: 100%
-    max-height: none
     .close-menu
       display: none
 
