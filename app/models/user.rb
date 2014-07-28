@@ -17,4 +17,8 @@ class User < ActiveRecord::Base
     Book.joins(:loans)
       .where(loans: { user_id: self.id, closed_at: nil })
   end
+
+  def read_books
+    borrowed_books.joins(:loans).where("loans.closed_at NOT NULL")
+  end
 end

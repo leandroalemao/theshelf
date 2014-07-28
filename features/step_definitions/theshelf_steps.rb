@@ -14,6 +14,10 @@ Given(/^I am on the add a book page$/) do
   visit new_book_path()
 end
 
+Given(/^I (?:am on|go to) the read books list$/) do
+  visit read_books_path
+end
+
 Given(/^I (?:am on|go to) (?:a|an available) book's page$/) do
   @book = @books.find{ |book| book.available? }
   visit book_path(@book.id)

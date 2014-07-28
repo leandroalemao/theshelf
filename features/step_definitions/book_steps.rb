@@ -131,3 +131,7 @@ end
 Then(/^I should see an empty search results message$/) do
   page.should_not have_css ".gallery li"
 end
+
+Then(/^I should see the book I've returned$/) do
+  page.should have_content @book.title
+end

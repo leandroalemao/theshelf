@@ -9,4 +9,3 @@ Feature: Edit account
     When I change my first name
     And I submit the new details
     Then I should see my new name
-

@@ -90,6 +90,10 @@ class BooksController < ApplicationController
     respond_with books.map(&:as_json)
   end
 
+  def read
+    @books = current_user.read_books
+  end
+
   private
 
   def book
