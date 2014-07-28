@@ -37,6 +37,10 @@ class BookDecorator < Draper::Decorator
     h.return_book_path(object)
   end
 
+  def extend_path
+    h.extend_book_path(object)
+  end
+
   def edit_path
     h.edit_book_path(object)
   end
@@ -62,7 +66,7 @@ class BookDecorator < Draper::Decorator
 
   def lent_actions
     if borrowed_by_me?
-      return_link
+      return_link + extend_link
     else
       h.content_tag(:div, class: 'borrower') do
         h.content_tag(:div, h.image_tag(current_borrower.avatar.thumb)) +
@@ -85,5 +89,9 @@ class BookDecorator < Draper::Decorator
 
   def return_link
     h.link_to h.t('books.actions.return'), return_path, class: 'btn-negative'
+  end
+
+  def extend_link
+    h.link_to h.t('books.actions.extend'), extend_path, class: 'btn-negative'
   end
 end

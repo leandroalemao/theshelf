@@ -13,6 +13,12 @@ Given(/^I've borrowed a book$/) do
   @book = create(:lent_book, borrower: @user).decorate
 end
 
+# Given(/^I've borrowed a book (once|twice)?$/) do |times|
+#   number = {"once" => 1, "twice" => 2}[times]
+#   number ||= 0
+#   @book = create(:lent_book, borrower: @user).decorate
+# end
+
 Given(/^there isn't a book with title (\w+)/) do |title|
   @title = title
   page.should_not have_content title
@@ -90,6 +96,10 @@ When(/^I search for that word/) do
   end
 end
 
+When(/^I extend my loan period$/) do
+  first('[class^="btn"]', text: I18n.t('books.actions.extend')).click
+end
+
 Then(/^I should see the book listed$/) do
   page.should have_content @book.title
 end
@@ -130,4 +140,8 @@ end
 
 Then(/^I should see an empty search results message$/) do
   page.should_not have_css ".gallery li"
+end
+
+Then(/^I should see that my loan was extended$/) do
+  page.should have_content I18n.t('flash.book.extended')
 end

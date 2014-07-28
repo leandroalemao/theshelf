@@ -29,10 +29,12 @@ FactoryGirl.define do
     factory :lent_book do
       ignore do
         borrower nil
+        # number nil
       end
 
       after(:create) do |book, evaluator|
         BookKeeper.new(book: book).lend_to! borrower: evaluator.borrower
+        # Loan.where(book_id: book.id, user_id: evaluator.borrower.id).by_most_recent
       end
     end
   end

@@ -4,6 +4,7 @@ en:
       add: Add new book
       borrow: Borrow
       edit: Edit
+      extend: Renew
       return: Return
     new: Add new book
     search: Search Book
@@ -15,6 +16,7 @@ en:
       borrowed: Book successfully borrowed
       created: Book successfully created
       deleted: Book successfully deleted
+      extended: Your loan was extended
       returned: Book successfully returned
       reviewed: Book successfully reviewed
       updated: Book successfully updated

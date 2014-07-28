@@ -13,4 +13,8 @@ class Loan < ActiveRecord::Base
   def closed?
     !!closed_at
   end
+
+  def extend!
+    update! ends_at: self.ends_at + 15.days
+  end
 end

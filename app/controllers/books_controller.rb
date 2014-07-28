@@ -90,6 +90,13 @@ class BooksController < ApplicationController
     respond_with books.map(&:as_json)
   end
 
+  def extend
+    book_keeper = BookKeeper.new book: book
+    book_keeper.extend_loan! borrower: current_user
+
+    redirect_to books_path, notice: I18n.t('flash.book.extended')
+  end
+
   private
 
   def book
