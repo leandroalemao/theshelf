@@ -15,7 +15,7 @@ TheShelf::Application.routes.draw do
     end
     collection do
       get 'search'
-      get 'read'
+      get "read"
     end
   end
 
