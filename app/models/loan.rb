@@ -1,5 +1,6 @@
 class Loan < ActiveRecord::Base
   REGULAR_PERIOD = 30.days
+  EXTENSION_PERIOD = 15.days
   scope :by_most_recent, -> { order('started_at desc') }
 
   belongs_to :borrower, foreign_key: :user_id, class_name: 'User'
@@ -16,7 +17,7 @@ class Loan < ActiveRecord::Base
   end
 
   def extend!
-    update! ends_at: self.ends_at + 15.days
+    update! ends_at: self.ends_at + EXTENSION_PERIOD
   end
 
   def extended?

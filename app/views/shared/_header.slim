@@ -27,6 +27,7 @@ header.side-content.fixed-top
               .book-title.milli.truncate title="#{book.title}"
                 = link_to book.title, book.path
             .book-action = book.action
+            p = t('books.expiration_date', date: l(book.loan_ends_at, format: :regular))
     #close-menu.close-menu
       a href='#'
         = t('menu.close')

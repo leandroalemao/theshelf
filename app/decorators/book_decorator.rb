@@ -13,6 +13,10 @@ class BookDecorator < Draper::Decorator
     end
   end
 
+  def loan_ends_at
+    current_loan.ends_at
+  end
+
   def average_rating
     object.average_rating.round(1).to_s
   end
