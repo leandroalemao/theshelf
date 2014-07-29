@@ -2,7 +2,7 @@ class BookDecorator < Draper::Decorator
   delegate :authors, :cover, :cover_cache, :id, :last_review_by, :owner,
     :pages, :published_on, :readings, :reviews_by, :state, :subtitle, :summary,
     :title, :total_reviews, :url, :average_rating, :available?, :lent?,
-    :unavailable?, :to_model
+    :unavailable?, :loans, :current_loan, :to_model
   decorates_association :reviews
 
   def action
@@ -92,6 +92,8 @@ class BookDecorator < Draper::Decorator
   end
 
   def extend_link
-    h.link_to h.t('books.actions.extend'), extend_path, class: 'btn-negative'
+    if object.extendable?
+      h.link_to h.t('books.actions.extend'), extend_path, class: 'btn-negative'
+    end
   end
 end

@@ -13,15 +13,17 @@ Given(/^I've borrowed a book$/) do
   @book = create(:lent_book, borrower: @user).decorate
 end
 
-# Given(/^I've borrowed a book (once|twice)?$/) do |times|
-#   number = {"once" => 1, "twice" => 2}[times]
-#   number ||= 0
-#   @book = create(:lent_book, borrower: @user).decorate
-# end
+Given(/^I've extended the loan$/) do
+  @book.current_loan.extend!
+end
 
 Given(/^there isn't a book with title (\w+)/) do |title|
   @title = title
   page.should_not have_content title
+end
+
+Given(/^there is one week left on my loan$/) do
+  Timecop.travel(@book.current_loan.ends_at - 7.days)
 end
 
 When(/^I borrow an available book$/) do
@@ -144,4 +146,8 @@ end
 
 Then(/^I should see that my loan was extended$/) do
   page.should have_content I18n.t('flash.book.extended')
+end
+
+Then(/^I should not see an extend link$/) do
+  page.should_not have_content I18n.t('books.actions.extend')
 end
