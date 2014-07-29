@@ -8,4 +8,6 @@ section.default-page
 h1 = "my wishlist"
 ul
 	- @wishlist_items.each do |item|
-  		li.wishlist-item = item.book.title
+  		li.wishlist-item 
+  			= item.book.title
+  			= link_to "Remove", wishlist_item_path(item), method: "delete", class:"btn-wishlist-remove" 

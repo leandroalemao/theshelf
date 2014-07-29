@@ -15,3 +15,15 @@ end
 Then(/^I should see the book I added to the wishlist$/) do
   page.should have_css ".wishlist-item"
 end
+
+Given(/^there is one book on the wishlist$/) do
+  WishlistItem.create(book_id: Book.first.id, user_id: @user.id)
+end
+
+Given(/^I remove one book from the wishlist$/) do
+  first('.btn-wishlist-remove').click
+end
+
+Then(/^the item should be removed from the wishlist$/) do
+  page.should_not have_css ".wishlist-item"
+end
