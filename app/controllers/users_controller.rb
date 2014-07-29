@@ -1,6 +1,10 @@
 class UsersController < Clearance::UsersController
   before_action :handle_disabled_signup, only: [:new, :create]
 
+  def edit
+    @wishlist_items = WishlistItem.where(:user_id => current_user.id)
+  end
+
   def create
   end
 
@@ -21,4 +25,5 @@ class UsersController < Clearance::UsersController
   def handle_disabled_signup
     redirect_to log_in_path, notice: t('flashes.signup_disabled')
   end
+
 end

@@ -41,6 +41,10 @@ class BookDecorator < Draper::Decorator
     h.edit_book_path(object)
   end
 
+  def wishlist_path
+    h.wishlist_items_path(book_id: object.id)
+  end
+
   def edit_link
     h.link_to h.t('books.actions.edit'), edit_path
   end
@@ -49,6 +53,7 @@ class BookDecorator < Draper::Decorator
     {
       path: path,
       cover_path: cover.url,
+      wishlist_path: wishlist_path,
       title: title,
       owner: owner,
       authors: authors,

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140404130657) do
+ActiveRecord::Schema.define(version: 20140729114031) do
 
   create_table "books", force: true do |t|
     t.string   "title",                                                null: false
@@ -81,5 +81,12 @@ ActiveRecord::Schema.define(version: 20140404130657) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["remember_token"], name: "index_users_on_remember_token"
   add_index "users", ["role"], name: "index_users_on_role"
+
+  create_table "wishlist_items", force: true do |t|
+    t.integer  "user_id",    null: false
+    t.integer  "book_id",    null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end

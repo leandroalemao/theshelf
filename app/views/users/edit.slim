@@ -6,3 +6,6 @@ section.default-page
       = render 'form', form: form, user: current_user
 
 h1 = "my wishlist"
+ul
+	- @wishlist_items.each do |item|
+  		li.wishlist-item = item.book.title

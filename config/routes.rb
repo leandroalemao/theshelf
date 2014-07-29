@@ -4,6 +4,8 @@ TheShelf::Application.routes.draw do
 
   resources :session, controller: :sessions, only: [:create]
   resources :users, controller: :users, only: [:create]
+  resources :wishlist_items, only: [:create]
+
   resources :books do
     member do
       get 'borrow'

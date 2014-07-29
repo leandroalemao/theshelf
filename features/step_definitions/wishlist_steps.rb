@@ -13,5 +13,5 @@ When(/^add a book to the wishlist$/) do
 end
 
 Then(/^I should see the book I added to the wishlist$/) do
-  pending # express the regexp above with the code you wish you had
+  page.should have_css ".wishlist-item"
 end
