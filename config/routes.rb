@@ -10,6 +10,7 @@ TheShelf::Application.routes.draw do
       patch 'rate'
       get 'average'
       get 'return'
+      get 'renew'
       get 'review' => 'books#new_review', as: 'new_review'
       post 'review' => 'books#create_review', as: 'create_review'
     end

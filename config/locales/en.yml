@@ -5,6 +5,7 @@ en:
       borrow: Borrow
       edit: Edit
       return: Return
+      renew: Renew
     new: Add new book
     search: Search Book
     submit: Submit
@@ -18,6 +19,7 @@ en:
       returned: Book successfully returned
       reviewed: Book successfully reviewed
       updated: Book successfully updated
+      renewed: Book successfully renewed
 
   forms:
     books:

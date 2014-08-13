@@ -21,6 +21,19 @@ class BookKeeper
     end
   end
 
+  def renew_until!(borrower: nil)
+    return false unless book.lent? && book.current_borrower == borrower
+
+    ActiveRecord::Base.transaction do
+      book.current_loan.update ends_at: book.current_loan.ends_at + 15.days
+      if book.current_loan.renew_count < 2
+        book.current_loan.update renew_count: book.current_loan.renew_count + 1
+      else
+        return 'renew_count_exceedeed'
+      end
+    end
+  end
+
   private
   attr_reader :book
 end

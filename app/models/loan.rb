@@ -13,4 +13,5 @@ class Loan < ActiveRecord::Base
   def closed?
     !!closed_at
   end
+
 end
