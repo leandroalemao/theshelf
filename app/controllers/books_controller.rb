@@ -109,7 +109,7 @@ class BooksController < ApplicationController
       @book.summary = xml.xpath("//book/description").collect(&:text).first.to_s
       @book.url = xml.xpath("//book/url").collect(&:text).first.to_s
       @book.cover = File.basename(xml.xpath("//book/image_url").collect(&:text).first.to_s)
-      @book.published_on = xml.xpath("//book/publication_month").collect(&:text).first.to_s + '/' + xml.xpath("//book/publication_day").collect(&:text).first.to_s + '/' + xml.xpath("//book/publication_year").collect(&:text).first.to_s
+      @book.published_on = xml.xpath("//book/publication_day").collect(&:text).first.to_s + '/' + xml.xpath("//book/publication_month").collect(&:text).first.to_s + '/' + xml.xpath("//book/publication_year").collect(&:text).first.to_s
 
       if @book.save
         flash[:success] = t('flash.book.created')
@@ -118,11 +118,11 @@ class BooksController < ApplicationController
         render :new
       end
 
-      gravatar_url = xml.xpath("//book/image_url").collect(&:text).first.to_s
+      cover_url = xml.xpath("//book/image_url").collect(&:text).first.to_s
 
       CoverUploader.enable_processing = true
       @uploader = CoverUploader.new(@book, :cover)
-      @uploader.download! (gravatar_url)
+      @uploader.download! (cover_url)
       @uploader.store!
 
       @book.update_column(:cover, File.basename(xml.xpath("//book/image_url").collect(&:text).first.to_s))
