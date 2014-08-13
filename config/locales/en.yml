@@ -5,10 +5,13 @@ en:
       borrow: Borrow
       edit: Edit
       return: Return
+      add_manual: Manually
+      add_auto: GoodReads ISBN
     new: Add new book
     search: Search Book
     submit: Submit
     owner: "belongs to %{name}"
+    goodreads: Add a book by GoodReads
 
   flash:
     book:
