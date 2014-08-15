@@ -17,7 +17,9 @@ class BooksController < ApplicationController
 
   def create
     @book = Book.new(book_params)
-
+    if params[:commit] == 'Search By ISBN'
+        redirect_to goodreads_search(@book) and return
+    end
     if @book.save
       flash[:success] = t('flash.book.created')
       redirect_to book_path(@book)
@@ -90,43 +92,13 @@ class BooksController < ApplicationController
     respond_with books.map(&:as_json)
   end
 
-  def add
-    render
-  end
-
-  def goodreads_search
-      require 'nokogiri'
-      require 'open-uri'
-
-      xml = Nokogiri::XML(open('http://www.goodreads.com/book/isbn?isbn='+params[:isbn]+'&key=2YmtRP9SjvDKNqvgQMagyQ'))
-
-      @book = Book.create
-
-      @book.title = xml.xpath("//book/title").collect(&:text).first.to_s
-      @book.pages = xml.xpath("//book/num_pages").collect(&:text).first.to_s
-      @book.authors = xml.xpath("//book/authors/author/name").collect(&:text).first.to_s
-      @book.owner = xml.xpath("//book/publisher").collect(&:text).first.to_s
-      @book.summary = xml.xpath("//book/description").collect(&:text).first.to_s
-      @book.url = xml.xpath("//book/url").collect(&:text).first.to_s
-      @book.cover = File.basename(xml.xpath("//book/image_url").collect(&:text).first.to_s)
-      @book.published_on = xml.xpath("//book/publication_day").collect(&:text).first.to_s + '/' + xml.xpath("//book/publication_month").collect(&:text).first.to_s + '/' + xml.xpath("//book/publication_year").collect(&:text).first.to_s
-
-      if @book.save
-        flash[:success] = t('flash.book.created')
-        redirect_to book_path(@book)
-      else
-        render :new
-      end
-
-      cover_url = xml.xpath("//book/image_url").collect(&:text).first.to_s
-
-      CoverUploader.enable_processing = true
-      @uploader = CoverUploader.new(@book, :cover)
-      @uploader.download! (cover_url)
-      @uploader.store!
-
-      @book.update_column(:cover, File.basename(xml.xpath("//book/image_url").collect(&:text).first.to_s))
-
+  def goodreads_search(book)
+    if GoodreadSearcher.new(book: @book, isbn: params[:isbn]).search_at!
+      flash[:success] = t('flash.book.created')
+      return book_path(book)
+    else
+      render :new
+    end
   end
 
   def goodreads

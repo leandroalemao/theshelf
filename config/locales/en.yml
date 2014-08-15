@@ -11,7 +11,8 @@ en:
     search: Search Book
     submit: Submit
     owner: "belongs to %{name}"
-    goodreads: Add a book by GoodReads
+    goodreads: OR Add a book by GoodReads
+    searchgoodreads: Search By ISBN
 
   flash:
     book:
@@ -56,6 +57,7 @@ en:
         summary: Summary
         title: Title
         url: URL
+        isbn: Isbn
       user:
         first_name: First Name
         last_name: Last Name

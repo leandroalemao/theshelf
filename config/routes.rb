@@ -18,11 +18,9 @@ TheShelf::Application.routes.draw do
     end
   end
 
-
-  get 'add', to: "books#add", as: :add_book
   get 'goodreads', to: 'books#goodreads', as: :goodreads_book
   get 'goodreads_search', to: 'books#goodreads_search', as: :goodreads_search
-  
+
   scope :my_account do
     get '/' => 'users#edit', as: 'my_account'
     patch '/' => 'users#update', as: 'update_my_account'

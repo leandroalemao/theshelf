@@ -3,3 +3,4 @@ section.default-page
 
   = form_for @book do |form|
     .image-and-fields = render 'form', form: form, book: @book
+    .image-and-fields = render 'goodreads', book: @book

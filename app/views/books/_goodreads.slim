@@ -1,0 +1,13 @@
+BR/
+
+h1.kilo = t('books.goodreads')
+
+BR/
+
+= form_tag({:controller=>"books", :action=>"goodreads_search"}, method: :get, id: 'goodreads', class: 'search-field kilo') do
+  = text_field_tag :isbn, nil, placeholder: t('helpers.label.book.isbn')
+  = submit_tag t('books.searchgoodreads'), class: 'btn-positive'
+
+BR/
+
+h3.micro = '(Example: 0596529260)'
