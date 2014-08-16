@@ -84,6 +84,9 @@ en:
       one: "(1) Review"
       other: "(%{count}) Reviews"
 
+  renews:
+    error: "You've exceeded the renewals' maximum quantity!"
+
   sign_in:
     designed_by: Designed by
     more: If you'd like to know more about it, I'd be glad to have a chat with you.

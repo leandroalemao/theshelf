@@ -14,4 +14,11 @@ class Loan < ActiveRecord::Base
     !!closed_at
   end
 
+  def allowed_to_renew_again?
+    if Loan.by_most_recent.first.renew_count < 2
+      return true
+    else
+      return false
+    end
+  end
 end

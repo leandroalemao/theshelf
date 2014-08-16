@@ -60,10 +60,10 @@ class BooksController < ApplicationController
   end
 
   def renew
-    if BookKeeper.new(book: book).renew_until!(borrower: current_user) == 'renew_count_exceedeed'
-      flash[:error] = "You've exceeded the renewals' maximum quantity!"
-    else
+    if BookKeeper.new(book: book).renew_until!(borrower: current_user)
       flash[:success] = t('flash.book.renewed')
+    else
+      flash[:error] = t('renews.error')
     end
     redirect_to books_path
   end

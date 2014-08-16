@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140404130657) do
+ActiveRecord::Schema.define(version: 20140813183505) do
 
   create_table "books", force: true do |t|
     t.string   "title",                                                null: false
@@ -31,11 +31,12 @@ ActiveRecord::Schema.define(version: 20140404130657) do
   end
 
   create_table "loans", force: true do |t|
-    t.integer  "user_id",    null: false
-    t.integer  "book_id",    null: false
+    t.integer  "user_id",                 null: false
+    t.integer  "book_id",                 null: false
     t.datetime "started_at"
     t.datetime "ends_at"
     t.datetime "closed_at"
+    t.integer  "renew_count", default: 0
   end
 
   add_index "loans", ["book_id"], name: "index_loans_on_book_id"

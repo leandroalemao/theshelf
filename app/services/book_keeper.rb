@@ -26,10 +26,10 @@ class BookKeeper
 
     ActiveRecord::Base.transaction do
       book.current_loan.update ends_at: book.current_loan.ends_at + 15.days
-      if book.current_loan.renew_count < 2
+      if book.current_loan.allowed_to_renew_again?
         book.current_loan.update renew_count: book.current_loan.renew_count + 1
       else
-        return 'renew_count_exceedeed'
+        return false
       end
     end
   end

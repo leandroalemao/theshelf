@@ -87,4 +87,31 @@ describe BookKeeper do
     end
 
   end
+
+  context '#renew_until!' do
+    it 'increments the number of renewals' do
+      user = build :user
+      book = create(:lent_book, borrower: user)
+      book_keeper = BookKeeper.new(book: book)
+
+      expect { book_keeper.renew_until!(borrower: user) }.to change{ Loan.by_most_recent.first.renew_count }.by(1)
+    end
+
+    it "returns false if the book wasn't borrowed by me" do
+      current_borrower = double('User')
+      another_user = double('User')
+      book = double('Book', lent?: true, current_borrower: current_borrower)
+      book_keeper = BookKeeper.new(book: book)
+
+      book_keeper.return_by!(borrower: another_user).should be_false
+    end
+
+    it "returns false if the book isn't lent" do
+      book = double('Book', lent?: false)
+      book_keeper = BookKeeper.new(book: book)
+
+      book_keeper.return_by!(borrower: double('User')).should be_false
+    end
+
+  end
 end

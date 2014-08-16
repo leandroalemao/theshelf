@@ -67,10 +67,10 @@ class BookDecorator < Draper::Decorator
   def lent_actions
     if borrowed_by_me?
       if book.current_loan.renew_count < 2
-          h.content_tag(:div, class: 'borrower') do
+        h.content_tag(:div, class: 'borrower') do
             h.content_tag(:div, return_link) +
             h.content_tag(:div, renew_link)
-          end
+        end
       else
         h.content_tag(:div, class: 'borrower') do
           h.content_tag(:div, return_link)
